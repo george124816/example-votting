@@ -2,7 +2,7 @@ version: "3"
 
 services:
   vote:
-    image: georgerodriguex/vote:1.0
+    image: georgerodriguex/vote:latest
     command: python app.py
     ports:
       - "1234:80"
@@ -11,7 +11,7 @@ services:
       - back-tier
 
   worker:
-    image: georgerodriguex/worker:1.0
+    image: georgerodriguex/worker:latest
     depends_on:
       - "redis"
       - "db"
@@ -19,7 +19,7 @@ services:
       - back-tier
 
   result:
-    image: georgerodriguex/result:1.0
+    image: georgerodriguex/result:latest
     command: nodemon server.js
     ports:
       - "1235:80"
