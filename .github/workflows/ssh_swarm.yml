@@ -1,0 +1,25 @@
+name: deploy swarm on gcp
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  docker_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ssh here we go
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker stack rm vote
+            rm -rf /home/geeorgeqq/example-voting-app/
+            git clone https://github.com/g1248163264128/example-voting-app.git
+            cd /home/geeorgeqq/example-voting-app/
+            docker stack deploy --compose-file docker-stack.yml vote
+
