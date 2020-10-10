@@ -9,6 +9,10 @@ services:
     networks:
       - front-tier
       - back-tier
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
 
   worker:
     image: georgerodriguex/worker:latest
@@ -45,6 +49,10 @@ services:
       - "db-data:/var/lib/postgresql/data"
     networks:
       - back-tier
+    deploy: 
+      placement:
+        constraints:
+          - "node.role==manager"
 
 volumes:
         db-data:
