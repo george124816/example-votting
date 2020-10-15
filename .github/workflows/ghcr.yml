@@ -53,20 +53,6 @@ jobs:
             docker push $DOCKER_REGISTRY/$DOCKER_USER/$DOCKER_REPOSITORY:latest
             echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_USER/$DOCKER_REPOSITORY:latest"
         -
-          name: build, tag and push vote worker java
-          id: workerjava
-          env:
-            DOCKER_REGISTRY: ghcr.io
-            DOCKER_USER: george124816
-            DOCKER_REPOSITORY: worker
-            IMAGE_TAG: ${{ github.sha }}
-          run: |
-            docker build -f ./worker/Dockerfile.j -t $DOCKER_REGISTRY/$DOCKER_USER/$DOCKER_REPOSITORY:$IMAGE_TAG ./worker/
-            docker push $DOCKER_REGISTRY/$DOCKER_USER/$DOCKER_REPOSITORY:$IMAGE_TAG-java
-            docker tag $DOCKER_REGISTRY/$DOCKER_USER/$DOCKER_REPOSITORY:$IMAGE_TAG $DOCKER_REGISTRY/$DOCKER_USER/$DOCKER_REPOSITORY:latest-java
-            docker push $DOCKER_REGISTRY/$DOCKER_USER/$DOCKER_REPOSITORY:latest-java
-            echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_USER/$DOCKER_REPOSITORY:latest-java"
-        -
           name: build, tag and push result image
           id: result
           env:
