@@ -2,8 +2,7 @@ name: build n' push to ghcr
 
 on:
   push:
-    branches:
-      - master
+    branches: master
 
 jobs:
   push_to_ghcr:
@@ -55,7 +54,7 @@ jobs:
             echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_USER/$DOCKER_REPOSITORY:latest"
         -
           name: build, tag and push vote worker java
-          id: worker
+          id: workerjava
           env:
             DOCKER_REGISTRY: ghcr.io
             DOCKER_USER: george124816
