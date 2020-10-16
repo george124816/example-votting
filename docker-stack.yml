@@ -21,6 +21,11 @@ services:
       - "db"
     networks:
       - back-tier
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 200M
 
   result:
     image: georgerodriguex/result:latest
